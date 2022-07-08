@@ -50,14 +50,14 @@
           </form>
         </div>
     </div>
-    <vue3-alert-box/>
+    <!-- <vue3-alert-box/> -->
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useAlert } from 'vue3-use-alert'
+// import { useAlert } from 'vue3-use-alert'
 
-const { openAlert } = useAlert()
+// const { openAlert } = useAlert()
 
     // variables
     const message = ref('Hy there, you wanna edit me, pls go ahead, Cheers!!!!!')
@@ -68,14 +68,15 @@ const { openAlert } = useAlert()
     const autoClose = ref(4000)
 
     const controlAlert = () => {
-      openAlert({
-        message: message.value,
-        position: position.value,
-        animation: animation.value,
-        backgroundColor: bgColor.value,
-        textColor: textColor.value,
-        autoClose: autoClose.value
-      })
+      console.log('worining')
+      // openAlert({
+      //   message: message.value,
+      //   position: position.value,
+      //   animation: animation.value,
+      //   backgroundColor: bgColor.value,
+      //   textColor: textColor.value,
+      //   autoClose: autoClose.value
+      // })
     }
 </script>
 
