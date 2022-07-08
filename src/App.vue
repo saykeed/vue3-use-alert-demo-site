@@ -44,20 +44,21 @@
               <div class="autoClose my-2">
                 <label for="autoClose">Auto Close</label>
                 <input class="p-2" type="number" id="autoClose" v-model="autoClose">
+                <p>Note: If <code>null</code> is passed in the autoClose, it disables the autoClose</p>
               </div>
             </div>
             <button type="submit" class="bg-red-500 text-white text-center px-3 py-2 rounded">Load Alert</button>
           </form>
         </div>
     </div>
-    <!-- <vue3-alert-box/> -->
+    <vue3-alert-box/>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-// import { useAlert } from 'vue3-use-alert'
+import { useAlert } from 'vue3-use-alert'
 
-// const { openAlert } = useAlert()
+const { openAlert } = useAlert()
 
     // variables
     const message = ref('Hy there, you wanna edit me, pls go ahead, Cheers!!!!!')
@@ -68,15 +69,14 @@ import { ref } from 'vue';
     const autoClose = ref(4000)
 
     const controlAlert = () => {
-      console.log('worining')
-      // openAlert({
-      //   message: message.value,
-      //   position: position.value,
-      //   animation: animation.value,
-      //   backgroundColor: bgColor.value,
-      //   textColor: textColor.value,
-      //   autoClose: autoClose.value
-      // })
+      openAlert({
+        message: message.value,
+        position: position.value,
+        animation: animation.value,
+        backgroundColor: bgColor.value,
+        textColor: textColor.value,
+        autoClose: autoClose.value
+      })
     }
 </script>
 
