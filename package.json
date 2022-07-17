@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "vue": "^3.2.25",
-    "vue3-use-alert": "^1.0.0"
+    "vue3-use-alert": "^1.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",

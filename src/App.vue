@@ -1,72 +1,71 @@
 
 <template>
-    <div class="app text-red-600 text-center p-4  min-h-screen w-full bg-sky-200">
-      <div class="intro max-w-[500px] mx-auto">
-          <h1 class="text-2xl">Hy guys, I hope you are good. Nothing much to see here, just a demo of how the vue3-use-alert plugin works</h1>
-          <p class="xl mt-5">Play with the inputs below to see how it works</p>
-      </div>
+    <div class="demosite min-h-screen flex items-center justify-center">
+        <div class="wrap w-[90%] max-w-[500px] mx-auto my-4">
+          <h3 class="text-3xl text-center font-bold text-rose-700">Vue3-Use-Alert</h3>
+            <p class="text-lg text-rose-600 font-medium">Message:</p>
+            <textarea v-model="message" @click="destroyAlert"
+            class="resize-none w-full h-22 border-2  outline-none border-rose-500 focus:shadow-md focus:shadow-rose-400 p-1 rounded-md"></textarea>
 
-        <div class="playGround p-2 max-w-[600px] mx-auto border-2 border-red-600 rounded-lg">
-          <form @submit.prevent="controlAlert">
-            <label for="message">message: </label>
-            <textarea class="w-full max-w-[300px] h-24 resize-none p-2" id="message" v-model="message"></textarea>
-            <div class="inputs">
-              <div class="position my-2">
-                  <label for="position">Position: </label>
-                  <select id="position p-2" v-model="position">
-                    <option value="topLeft">topLeft</option>
-                    <option value="topRight">topRight</option>
-                    <option value="bottomLeft">bottomLeft</option>
-                    <option value="bottomRight">bottomRight</option>
-                    <option value="topCenter">topCenter</option>
-                    <option value="bottomCenter">bottomCenter</option>
-                  </select>
-              </div>
-              
-              <div class="animation my-2">
-                  <label for="animation">Animation: </label>
-                  <select id="animation p-2" v-model="animation">
-                    <option value="slideX">slideX</option>
-                    <option value="slideY">slideY</option>
-                  </select>
-              </div>
+            <p class="text-lg text-rose-600 font-medium mt-2">Position:</p>
+            <select v-model="position" class="w-full outline-none border-2 border-rose-600 rounded-md p-1 " @click="destroyAlert">
+              <option value="topRight">topRight</option>
+              <option value="topLeft">topLeft</option>
+              <option value="bottomRight">bottomRight</option>
+              <option value="bottomLeft">bottomLeft</option>
+              <option value="topCenter">topCenter</option>
+              <option value="bottomCenter">bottomCenter</option>
+            </select>
 
-              <div class="bgColor my-2">
-                <label for="bgColor">Background Color</label>
-                <input class="p-2" type="text" id="bgColor" placeholder="hex values, rgb etc" v-model="bgColor">
-              </div>
+            <!-- section for animation -->
+            <p class="text-lg text-rose-600 font-medium mt-2">Animation:</p>
+            <select v-model="animation" class="w-full outline-none border-2 border-rose-600 rounded-md p-1" @click="destroyAlert">
+              <option value="slideX">slideHorizontaly</option>
+              <option value="slideY">slideVertically</option>
+            </select>
 
-              <div class="textColor my-2">
-                <label for="textColor">Text Color</label>
-                <input class="p-2" type="text" id="textColor" placeholder="hex values, rgb etc" v-model="textColor">
-              </div>
+          <!-- section for background color -->
+            <p class="text-lg text-rose-600 font-medium mt-2">Background Color: <i class="text-sky-400 text-sm">click to select color</i></p>
+            <input type="color" v-model="bgColor" class="w-[100px] h-[50px]" @click="destroyAlert">
 
-              <div class="autoClose my-2">
-                <label for="autoClose">Auto Close</label>
-                <input class="p-2" type="number" id="autoClose" v-model="autoClose">
-                <p>Note: If <code>null</code> is passed in the autoClose, it disables the autoClose</p>
-              </div>
-            </div>
-            <button type="submit" class="bg-red-500 text-white text-center px-3 py-2 rounded">Load Alert</button>
-          </form>
+            <!-- section for text color -->
+            <p class="text-lg text-rose-600 font-medium mt-2">Text Color: <i class="text-sky-400 text-sm">click to select color</i></p>
+            <input type="color" v-model="textColor" class="w-[100px] h-[50px]" @click="destroyAlert">
+
+            <!-- section for auto close input -->
+            <p class="text-lg text-rose-600 font-medium mt-2">Auto Close: <i class="text-sky-400 text-sm">Input the amount of milliseconds or leave it null to disable autoclose</i></p>
+            <input type="number" v-model="autoClose" class="w-full outline-none border-2 border-rose-600 rounded-md p-1" @click="destroyAlert">
+
+            <!-- button to activate alert box -->
+            <button @click="controlAlert" class="mt-3 mx-auto block bg-rose-600 text-white p-2 rounded shadow-lg hover:bg-rose-800">Activate Alert</button>
+
+            <p class="text-sm text-rose-700 text-center font-bold">
+              If you'll like to contribute to it, click on the link fixed to the left of this site. Gracias!!!
+            </p>
+
+            <a href="https://github.com/saykeed/vue3-use-alert.git" target="_blank"
+              class="fixed top-1/2 -translate-y-1/2 left-0 py-3 px-2 bg-rose-500 hover:bg-rose-600 text-white text-xl"
+            >
+              <i class="fa fa-github"></i>
+            </a>
         </div>
     </div>
     <vue3-alert-box/>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useAlert } from 'vue3-use-alert'
 
-const { openAlert } = useAlert()
+const { openAlert, closeAlert } = useAlert()
 
     // variables
-    const message = ref('Hy there, you wanna edit me, pls go ahead, Cheers!!!!!')
+    const message = ref('Hy developer, you wanna edit me, pls go ahead!!!')
     const position = ref('topRight')
     const animation =  ref('slideX')
-    const bgColor = ref('purple')
-    const textColor = ref('white')
-    const autoClose = ref(4000)
+    const bgColor = ref('#d21e1e')
+    const textColor = ref('#ffffff')
+    const autoClose = ref()
 
     const controlAlert = () => {
       openAlert({
@@ -78,6 +77,21 @@ const { openAlert } = useAlert()
         autoClose: autoClose.value
       })
     }
+
+    const destroyAlert = () => {
+      closeAlert()
+    }
+
+    onMounted(() => {
+      openAlert({
+        message: "You are Welcome to vue3-use-alert-demo",
+        position: 'topRight',
+        animation: 'slideX',
+        backgroundColor: 'purple',
+        textColor: 'white',
+        autoClose: null
+      })
+    })
 </script>
 
 <style>
